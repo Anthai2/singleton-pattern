@@ -11,5 +11,14 @@ public class Test {
         ThreadSafeSingleton instance4 = ThreadSafeSingleton.getInstance();
         System.out.println("instance3: " + instance3);
         System.out.println("instance4: " + instance4);
+
+        System.out.println("\n=== Ap dung vao bai toan cu the: Quan ly ket noi DB ===");
+        DatabaseConnectionManager orderServiceDb = DatabaseConnectionManager.getInstance();
+        DatabaseConnectionManager paymentServiceDb = DatabaseConnectionManager.getInstance();
+
+        orderServiceDb.executeQuery("OrderService", "SELECT * FROM orders WHERE id = 101");
+        paymentServiceDb.executeQuery("PaymentService", "UPDATE payments SET status = 'PAID' WHERE id = 77");
+
+        System.out.println("orderServiceDb == paymentServiceDb ? " + (orderServiceDb == paymentServiceDb));
     }
 }
